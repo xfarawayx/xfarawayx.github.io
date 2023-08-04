@@ -89,7 +89,7 @@
     # whether to omit favicon resource links
     noFavicon = false
     # modern SVG favicon to use in place of older style .png and .ico files
-    svgFavicon = ""
+    svgFavicon = "/gurimon.svg"
     # Safari mask icon color
     iconColor = "#5bbad5"
     # Windows v8-10 tile color
@@ -141,9 +141,9 @@
     # FixIt 0.2.0 | NEW Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = "/fixit.min.svg"
+      logo = ""
       # title name
-      name = "My Hugo FixIt Site"
+      name = "xfarawayx's Blog"
       # you can add extra information before the name (HTML format is supported), such as icons
       pre = ""
       # you can add extra information after the name (HTML format is supported), such as icons
@@ -176,7 +176,7 @@
     # FixIt 0.2.0 | NEW whether to show the author
     author = true
     # Site creation year
-    since = ""
+    since = "2023"
     # FixIt 0.2.14 | NEW whether to show total word count of site content
     wordCount = true
     # FixIt 0.2.12 | NEW Public network security only in China (HTML format is supported)
@@ -240,7 +240,7 @@
     [params.home.profile]
       enable = false
       # Gravatar Email for preferred avatar in home page
-      gravatarEmail = ""
+      gravatarEmail = "farawaylc@qq.com"
       # URL of avatar shown in home page
       avatarURL = ""
       # FixIt 0.2.17 | NEW identifier of avatar menu link
@@ -778,7 +778,7 @@
   # FixIt 0.2.14 | NEW Gravatar config
   [params.gravatar]
     # FixIt 0.2.18 | NEW Depends on the author's email, if the author's email is not set, the local avatar will be used
-    enable = false
+    enable = true
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # ["cn.gravatar.com", "gravatar.loli.net", ...]
     style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
@@ -841,3 +841,9 @@
   [module.hugoVersion]
     extended = true
     min = "0.109.0"
+
+[author]
+  name = 'xfarawayx'
+  link = 'https://xfarawayx.github.io/'
+  email = 'farawaylc@qq.com'
+  avatar = '/qq-image.svg'

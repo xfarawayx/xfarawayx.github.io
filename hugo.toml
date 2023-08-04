@@ -1,4 +1,4 @@
-title = "我的 Hugo FixIt 网站"
+title = "xfarawayx's Blog"
 baseURL = "http://example.org/"
 # 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
@@ -13,24 +13,6 @@ theme = "FixIt"
 [params]
   # FixIt 主题版本
   version = "0.2.X"
-
-[menu]
-  [[menu.main]]
-    identifier = "posts"
-    name = "文章"
-    url = "/posts/"
-    weight = 1
-  [[menu.main]]
-    identifier = "categories"
-    name = "分类"
-    url = "/categories/"
-    title = ""
-    weight = 2
-  [[menu.main]]
-    identifier = "tags"
-    name = "标签"
-    url = "/tags/"
-    weight = 3
 
 # Hugo 解析文档的配置
 [markup]

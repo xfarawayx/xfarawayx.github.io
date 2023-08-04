@@ -4,10 +4,10 @@ subtitle:
 date: {{ .Date }}
 draft: true
 author:
-  name:
-  link:
-  email:
-  avatar:
+  name: xfarawayx
+  link: https://xfarawayx.github.io
+  email: farawaylc@qq.com
+  avatar: /qq-image.jpg
 description:
 keywords:
 license:
@@ -26,12 +26,12 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: false
+math: true
 lightgallery: false
 password:
 message:
 repost:
-  enable: true
+  enable: false
   url:
 
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter

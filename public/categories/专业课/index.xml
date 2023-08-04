@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>专业课 - 分类 - xfarawayx&#39;s Blog</title>
+    <link>http://example.org/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/</link>
+    <description>专业课 - 分类 - xfarawayx&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 14:24:08 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/" rel="self" type="application/rss+xml" /><item>
+  <title>漏洞分析：缓冲区溢出</title>
+  <link>http://example.org/posts/vul1/</link>
+  <pubDate>Fri, 04 Aug 2023 14:24:08 &#43;0800</pubDate>
+  <author>作者</author>
+  <guid>http://example.org/posts/vul1/</guid>
+  <description><![CDATA[<p>本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。</p>]]></description>
+</item>
+</channel>
+</rss>
