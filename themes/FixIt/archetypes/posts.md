@@ -2,7 +2,7 @@
 title: {{ replace .TranslationBaseName "-" " " | title }}
 subtitle:
 date: {{ .Date }}
-draft: true
+draft: false
 author:
   name: xfarawayx
   link: https://xfarawayx.github.io

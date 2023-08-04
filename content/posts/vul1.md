@@ -7,7 +7,7 @@ author:
   name: xfarawayx
   link: https://xfarawayx.github.io
   email: farawaylc@qq.com
-  avatar: /qq-image.jpg
+  avatar: /qq-image.svg
 description:
 keywords:
 license:
@@ -15,7 +15,7 @@ comment: false
 weight: 0
 tags:
   - 信息安全
-  - Article
+  - 笔记
 categories:
   - 专业课
 hiddenFromHomePage: false
@@ -286,7 +286,7 @@ void validate_passwd(char* passwd) {
 
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[image]) {
 	if(argc!=3) {
   		printf("Usage Error:   \n");
   		fflush(stdout);
@@ -405,7 +405,7 @@ exit(0)
 #include <stdio.h>
 #include <string.h>
 
-int addr[] = {
+int addr[image] = {
   0xb7e5f430 , // system()
   0x0804856f , // pop-ret
   0xbffff688 , // e1="echo E421140XX"

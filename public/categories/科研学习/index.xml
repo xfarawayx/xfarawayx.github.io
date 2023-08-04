@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>科研学习 - 分类 - xfarawayx&#39;s Blog</title>
+    <link>http://example.org/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/</link>
+    <description>科研学习 - 分类 - xfarawayx&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml" /><item>
+  <title>《Cross-Modal Object Tracking ...》 论文阅读笔记</title>
+  <link>http://example.org/posts/crossmodel/</link>
+  <pubDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</pubDate>
+  <author>作者</author>
+  <guid>http://example.org/posts/crossmodel/</guid>
+  <description><![CDATA[<p>CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -1,9 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>所有文章 - xfarawayx&#39;s Blog</title>
-    <link>http://example.org/posts/</link>
-    <description>所有文章 | xfarawayx&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>笔记 - 标签 - xfarawayx&#39;s Blog</title>
+    <link>http://example.org/tags/%E7%AC%94%E8%AE%B0/</link>
+    <description>笔记 - 标签 - xfarawayx&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
   <title>《Cross-Modal Object Tracking ...》 论文阅读笔记</title>
   <link>http://example.org/posts/crossmodel/</link>
   <pubDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</pubDate>
