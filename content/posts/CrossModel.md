@@ -22,11 +22,7 @@ categories:
 hiddenFromHomePage: false
 hiddenFromSearch: false
 summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
+featuredImage: "/002.jpg"
 toc: true
 math: true
 lightgallery: false
@@ -46,9 +42,7 @@ CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Un
 ## 背景
 
 + 现有的目标跟踪方法大多基于 RGB 图像序列，然而这些方法在低光环境下存在局限性。现有的引入深度（RGB-D）或热成像（RGB-T）的方法由于需要对平台设计要求高，无法得到广泛应用。
-+ 许多监控摄像机包含近红外成像（NIR），在高光和低光环境下会分别切换为 RGB 成像和 NIR 成像（如下图）。两个模态特征差异大，为跟踪任务带来巨大挑战。本文主要尝试设计可嵌入式的网络解决减小两个模态数据的差异，并构建该类跨模态目标跟踪问题的 benchmark。
-
-![image](/002/01.jpg)
++ 许多监控摄像机包含近红外成像（NIR），在高光和低光环境下会分别切换为 RGB 成像和 NIR 成像（如题图）。两个模态特征差异大，为跟踪任务带来巨大挑战。本文主要尝试设计可嵌入式的网络解决减小两个模态数据的差异，并构建该类跨模态目标跟踪问题的 benchmark。
 
 ## 贡献点
 
@@ -71,7 +65,7 @@ CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Un
 
 ![image](/002/03.jpg)
 
-## “三步学习法”
+## “三步训练法”
 
 ![image](/002/04.jpg)
 

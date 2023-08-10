@@ -21,11 +21,7 @@ categories:
 hiddenFromHomePage: false
 hiddenFromSearch: false
 summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
+featuredImage: "/001.jpg"
 toc: true
 math: true
 lightgallery: false

@@ -101,7 +101,7 @@
 
   # FixIt 0.2.0 | NEW Search config
   [params.search]
-    enable = false
+    enable = true
     # type of search engine ["lunr", "algolia", "fuse"]
     type = "lunr"
     # max index length of the chunked content
@@ -238,7 +238,7 @@
     rss = 10
     # Home page profile
     [params.home.profile]
-      enable = false
+      enable = true
       # Gravatar Email for preferred avatar in home page
       gravatarEmail = "farawaylc@qq.com"
       # URL of avatar shown in home page
@@ -246,9 +246,9 @@
       # FixIt 0.2.17 | NEW identifier of avatar menu link
       avatarMenu = ""
       # FixIt 0.2.7 | CHANGED title shown in home page (HTML format is supported)
-      title = ""
+      title = "xfarawayx's Blog"
       # subtitle shown in home page
-      subtitle = ""
+      subtitle = "水平较菜，请多包涵。"
       # whether to use typeit animation for subtitle
       typeit = true
       # whether to show social links
@@ -263,7 +263,7 @@
 
   # FixIt 0.2.16 | CHANGED Social config about the author
   [params.social]
-    GitHub = ""
+    GitHub = "xfarawayx"
     Linkedin = ""
     Twitter = ""
     Instagram = ""
@@ -348,7 +348,7 @@
     Douyin = ""
     TikTok = ""
     Phone = ""
-    Email = ""
+    Email = "farawaylc@qq.com"
     RSS = true
 
   # FixIt 0.2.0 | CHANGED Page config
@@ -503,7 +503,7 @@
       Mix = false
     # FixIt 0.2.15 | CHANGED Comment config
     [params.page.comment]
-      enable = false
+      enable = true
       # FixIt 0.2.13 | NEW Artalk comment config (https://artalk.js.org/)
       [params.page.comment.artalk]
         enable = false
@@ -624,12 +624,12 @@
         katex = false
       # FixIt 0.2.14 | NEW Giscus comments config
       [params.page.comment.giscus]
-        enable = false
-        repo = ""
-        repoId = ""
-        category = ""
-        categoryId = ""
-        mapping = ""
+        enable = true
+        repo = "xfarawayx/xfarawayx.github.io"
+        repoId = "R_kgDOKDOmkA"
+        category = "General"
+        categoryId = "DIC_kwDOKDOmkM4CYgzO"
+        mapping = "pathname"
         strict = "0" # FixIt NEW | 0.2.18
         term = ""
         reactionsEnabled = "1"
@@ -778,7 +778,7 @@
   # FixIt 0.2.14 | NEW Gravatar config
   [params.gravatar]
     # FixIt 0.2.18 | NEW Depends on the author's email, if the author's email is not set, the local avatar will be used
-    enable = false
+    enable = true
     # Gravatar host, default: "www.gravatar.com"
     host = "www.gravatar.com" # ["cn.gravatar.com", "gravatar.loli.net", ...]
     style = "" # ["", "mp", "identicon", "monsterid", "wavatar", "retro", "blank", "robohash"]
@@ -847,3 +847,10 @@
   link = 'https://xfarawayx.github.io/'
   email = 'farawaylc@qq.com'
   avatar = '/qq-image.svg'
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "BaiduUrls"]
+  page = ["HTML", "MarkDown"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  taxonomyTerm = ["HTML"]
