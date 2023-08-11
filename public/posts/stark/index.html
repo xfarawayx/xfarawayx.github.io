@@ -5,35 +5,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>《Cross-Modal Object Tracking ...》 论文阅读笔记 - xfarawayx&#39;s Blog</title><meta name="author" content="">
+    <title>《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记 - xfarawayx&#39;s Blog</title><meta name="author" content="">
 <meta name="author-link" content="">
-<meta name="description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记" /><meta name="keywords" content='CV, 论文, 笔记' /><meta itemprop="name" content="《Cross-Modal Object Tracking ...》 论文阅读笔记">
-<meta itemprop="description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记"><meta itemprop="datePublished" content="2023-08-04T20:49:05+08:00" />
-<meta itemprop="dateModified" content="2023-08-04T20:49:05+08:00" />
-<meta itemprop="wordCount" content="681">
-<meta itemprop="keywords" content="CV,论文,笔记," /><meta property="og:title" content="《Cross-Modal Object Tracking ...》 论文阅读笔记" />
-<meta property="og:description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记" />
+<meta name="description" content="CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记" /><meta name="keywords" content='CV, 论文, 笔记' /><meta itemprop="name" content="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记">
+<meta itemprop="description" content="CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记"><meta itemprop="datePublished" content="2023-08-10T16:04:06+08:00" />
+<meta itemprop="dateModified" content="2023-08-10T16:04:06+08:00" />
+<meta itemprop="wordCount" content="1375">
+<meta itemprop="keywords" content="CV,论文,笔记," /><meta property="og:title" content="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记" />
+<meta property="og:description" content="CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://example.org/posts/crossmodel/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-08-04T20:49:05+08:00" />
-<meta property="article:modified_time" content="2023-08-04T20:49:05+08:00" />
+<meta property="og:url" content="http://example.org/posts/stark/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-10T16:04:06+08:00" />
+<meta property="article:modified_time" content="2023-08-10T16:04:06+08:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="《Cross-Modal Object Tracking ...》 论文阅读笔记"/>
-<meta name="twitter:description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记"/>
+<meta name="twitter:title" content="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记"/>
+<meta name="twitter:description" content="CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/crossmodel/" /><link rel="prev" href="http://example.org/posts/vul1/" /><link rel="next" href="http://example.org/posts/stark/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/stark/" /><link rel="prev" href="http://example.org/posts/crossmodel/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "《Cross-Modal Object Tracking ...》 论文阅读笔记",
+    "headline": "《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/example.org\/posts\/crossmodel\/"
-    },"genre": "posts","keywords": "CV, 论文, 笔记","wordcount":  681 ,
-    "url": "http:\/\/example.org\/posts\/crossmodel\/","datePublished": "2023-08-04T20:49:05+08:00","dateModified": "2023-08-04T20:49:05+08:00","publisher": {
+      "@id": "http:\/\/example.org\/posts\/stark\/"
+    },"genre": "posts","keywords": "CV, 论文, 笔记","wordcount":  1375 ,
+    "url": "http:\/\/example.org\/posts\/stark\/","datePublished": "2023-08-10T16:04:06+08:00","dateModified": "2023-08-10T16:04:06+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -145,68 +145,104 @@
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX">
-        <span>《Cross-Modal Object Tracking ...》 论文阅读笔记</span>
+        <span>《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://xfarawayx.github.io" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=" srcset="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x" sizes="auto" data-title="xfarawayx" data-alt="xfarawayx" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/>&nbsp;xfarawayx</a></span>
           <span class="post-category">收录于 <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 科研学习</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-08-04 20:49:05"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span title="更新于 2023-08-04 20:49:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 681 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
-    </div><div class="featured-image"><img loading="lazy" src="/002.jpg" srcset="/002.jpg 1x, /002.jpg 1.5x, /002.jpg 1.5x" sizes="auto" data-title="/002.jpg" data-alt="/002.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+      <div class="post-meta-line"><span title="发布于 2023-08-10 16:04:06"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-10">2023-08-10</time></span>&nbsp;<span title="更新于 2023-08-10 16:04:06"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-10">2023-08-10</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1375 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+    </div><div class="featured-image"><img loading="lazy" src="/003.png" srcset="/003.png 1x, /003.png 1.5x, /003.png 1.5x" sizes="auto" data-title="/003.png" data-alt="/003.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
           <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#贡献点">贡献点</a></li>
-    <li><a href="#marmot-模型">MArMOT 模型</a></li>
-    <li><a href="#三步训练法">“三步训练法”</a></li>
-    <li><a href="#cmotb-benchmark">CMOTB Benchmark</a></li>
-    <li><a href="#实验">实验</a></li>
+    <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#a-simple-baseline-based-on-transformer">A Simple Baseline Based on Transformer</a>
+      <ul>
+        <li><a href="#backbone">Backbone</a></li>
+        <li><a href="#encoder">Encoder</a></li>
+        <li><a href="#decoder">Decoder</a></li>
+        <li><a href="#head">Head</a></li>
+      </ul>
+    </li>
+    <li><a href="#spatio-temporal-transformer-tracking">Spatio-Temporal Transformer Tracking</a>
+      <ul>
+        <li><a href="#input">Input</a></li>
+        <li><a href="#head-1">Head</a></li>
+        <li><a href="#train">Train</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记</p>
-<h2 id="背景">背景</h2>
-<ul>
-<li>现有的目标跟踪方法大多基于 RGB 图像序列，然而这些方法在低光环境下存在局限性。现有的引入深度（RGB-D）或热成像（RGB-T）的方法由于需要对平台设计要求高，无法得到广泛应用。</li>
-<li>许多监控摄像机包含近红外成像（NIR），在高光和低光环境下会分别切换为 RGB 成像和 NIR 成像（如题图）。两个模态特征差异大，为跟踪任务带来巨大挑战。本文主要尝试设计可嵌入式的网络解决减小两个模态数据的差异，并构建该类跨模态目标跟踪问题的 benchmark。</li>
-</ul>
-<h2 id="贡献点">贡献点</h2>
-<ol>
-<li>提出一个新的具有挑战性和实践价值的任务：<strong>跨模态目标跟踪</strong>；</li>
-<li>提出一个算法 MArMOT(Modality-Aware cross-Modal Object Tracking algorithm)，用于减小两个模态图像之间的特征差异。该算法即插即用，可以方便嵌入各种主流跟踪算法框架。</li>
-<li>提出了一个“三步训练法”有效训练跨模态的目标跟踪网络。</li>
-<li>创建了一个跨模态目标跟踪问题的 benchmark 和对应的数据集，并通过实验证明上述方法有效。</li>
-</ol>
-<h2 id="marmot-模型">MArMOT 模型</h2>
-<p>该模型结构如下：</p>
-<p><img loading="lazy" src="/002/02.jpg" srcset="/002/02.jpg 1x, /002/02.jpg 1.5x, /002/02.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
-<p>模型经过 backbone 后首先通过两个并行的分支，用于学习目标在不同模态下的模态独立特征（modality-specific representation）。每个分支采用类似 Inception Net 的结构。具体原理待学习。</p>
-<p>之后使用 <a href="https://zhuanlan.zhihu.com/p/589953099"target="_blank" rel="external nofollow noopener noreferrer">SKNet</a> 融合两个特征。这里只用到 SKNet 后面的 Fuse 和 Select。</p>
-<p>将该网络插入各主流目标检测框架后实验验证得到两个模态的特征差异确实减小。</p>
-<p><img loading="lazy" src="/002/03.jpg" srcset="/002/03.jpg 1x, /002/03.jpg 1.5x, /002/03.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
-<h2 id="三步训练法">“三步训练法”</h2>
-<p><img loading="lazy" src="/002/04.jpg" srcset="/002/04.jpg 1x, /002/04.jpg 1.5x, /002/04.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
-<ol>
-<li>直接将 baseline 在数据集上微调。（此前 baseline 要在其他数据集上训练好）</li>
-<li>分别将对应模态的图像送往对应的分支进行训练。</li>
-<li>训练 SKNet 层并再次微调 baseline 模型。</li>
-</ol>
-<h2 id="cmotb-benchmark">CMOTB Benchmark</h2>
-<p>提供了一个名为 CMOTB 的跨模态目标识别数据集。此部分暂略。</p>
-<h2 id="实验">实验</h2>
-<p>待填坑 QwQ</p></div><div class="post-footer" id="post-footer">
+      </div><div class="content" id="content"><p>CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记</p>
+<h2 id="abstract">Abstract</h2>
+<p>本文提出了一个基于 encoder-decoder transformer 架构的目标跟踪网络，其中 encoder 用于对目标对象和搜索区域的全局时间特征和空间特征关系进行建模，decoder 用于预测目标对象的位置。在预测阶段仅使用一个 FCN 用于预测 bounding box 的两个端点。整个过程是端到端的，效率和测试表现均达到 SOTA。</p>
+<h2 id="a-simple-baseline-based-on-transformer">A Simple Baseline Based on Transformer</h2>
+<p>文章首先提出了一个仅考虑空间信息的 Baseline。</p>
+<p><img loading="lazy" src="/003/01.jpg" srcset="/003/01.jpg 1x, /003/01.jpg 1.5x, /003/01.jpg 1.5x" sizes="auto" data-title="images" data-alt="images" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<h3 id="backbone">Backbone</h3>
+<p>使用 vanilla ResNet 作为 backbone 分别提取 search 和 template 的特征。输入 template 图像 $z\in \mathbb R ^{3\times H_z\times W_z}$ 和 search 图像 $x\in \mathbb R ^{3\times H_x\times W_x}$，经过 backbone 得到特征图 $f_z \in \mathbb R ^{C\times \frac{H_z}{s}\times \frac{W_z}{s}}$，$f_x \in \mathbb R ^{C\times \frac{H_x}{s}\times \frac{W_x}{s}}$。</p>
+<h3 id="encoder">Encoder</h3>
+<h4 id="adjust">Adjust</h4>
+<p>得到特征图后通过一层网络将通道数 $C$ 降为 $d$，之后将后两维展开，得到 $f_z&rsquo; \in \mathbb R ^{d\times \frac{H_zW_z}{s^2}}$，$f_x&rsquo; \in \mathbb R ^{d\times \frac{H_xW_x}{s^2}}$；将 template 和 search <strong>拼接</strong>，得到 $(d, \frac{H_zW_z}{s^2}+\frac{H_xW_x}{s^2})$ 的 token 序列。</p>
+<h4 id="原理分析">原理分析</h4>
+<p>之后直接将向量序列嵌入位置信息后送入 encoder 层。可以通过一篇较新的论文 OSTrack 中的公式了解原理。根据 self-attention 的公式，有：</p>
+<p>$$
+A=\mathrm{Softmax} \left(\frac{QK^\top}{\sqrt{d_k}}\right)\cdot V = \mathrm{Softmax} \left(\frac{[Q_z;Q_x][K_z;K_x]^\top}{\sqrt{d_k}}\right)\cdot [V_z;V_x]
+$$</p>
+<p>令 $W_{zx}= \mathrm{Softmax} \left( \frac{Q_z{K}_x^\top}{\sqrt{d_k}}\right)$，表示模板和搜索区域间相似度的度量，其余同理，将上式展开，有</p>
+<p>$$
+A=[W_{zz},W_{zx}; W_{xz},W_{xx}]\cdot (V_z;V_x)=[W_{zz}V_z+W_{zx}V_x;W_{xz}V_z+W_{xx}V_x]
+$$</p>
+<p>其中 $W_{xz}V_z$ 对模板和搜索区域在空间上的联系进行建模，而 $W_{xx}V_x$ 基于图像全局提取了搜索区域的特征。因此特征提取和关系建模经由一次 self-attention 操作即可完成。</p>
+<h3 id="decoder">Decoder</h3>
+<p>将一个 target query 和 encoder 的输出送入 decoder，得到预测目标位置的一个一维向量，用于后续预测 bounding box。</p>
+<div class="details admonition question open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>关于 decoder 部分<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>论文的 decoder 部分写的较为简略，说沿用了 DETR 的设计，只是将 query 个数减少为 1。</p>
+<p>这里的 Target Query 应该不包含任何内容，只是描述 query 个数。</p>
+<p>根据 decoder 的理论，这里的一维向量应该表示每个特征向量的与目标的相似度/相关度之类的，用于后续调整特征向量的权重。</p>
+</div>
+    </div>
+  </div>
+<h3 id="head">Head</h3>
+<p><img loading="lazy" src="/003/02.jpg" srcset="/003/02.jpg 1x, /003/02.jpg 1.5x, /003/02.jpg 1.5x" sizes="auto" data-title="images" data-alt="images" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<p>如图。将特征序列点乘 decoder 的输出得到模板和搜索区域的相似度向量，再与原特征序列相乘得到最终的特征序列。</p>
+<p>将特征序列展开成特征图 $f\in \mathbb R^{d\times \frac{H_s}{s}\times \frac{W_s}{s}}$，并送入 FCN，得到两张概率图 $P_{tl}(x,y), P_{br}(x,y)$，分别用于预测 bounding box 的左上角和右下角的坐标。将概率图的概率分布期望作为预测坐标，即</p>
+<p>$$
+(\hat{x_{tl}}, \hat{y_{tl}})=(\sum_{y=0}^H \sum_{x=0}^W x\cdot P_{tl}(x,y), \sum_{y=0}^H \sum_{x=0}^W y\cdot P_{tl}(x,y))
+$$</p>
+<p>（上述为左上，右下同理）</p>
+<p>训练部分，损失函数仅包含 $l_1$ Loss 和 IoU Loss，不包含分类的损失：</p>
+<p>$$
+L=\lambda_{iou}L_{iou}(b_i,\hat{b_i})+\lambda_{L_1}L_1(b_i,\hat{b_i})
+$$</p>
+<h2 id="spatio-temporal-transformer-tracking">Spatio-Temporal Transformer Tracking</h2>
+<p>基于上面的 baseline，考虑将时序信息也用于建模。这里主要通过适时加入当前帧的模板信息来实现。</p>
+<p><img loading="lazy" src="/003/03.jpg" srcset="/003/03.jpg 1x, /003/03.jpg 1.5x, /003/03.jpg 1.5x" sizes="auto" data-title="images" data-alt="images" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
+<h3 id="input">Input</h3>
+<p>与前面的 baseline 仅输入第一帧信息作为模板和当前帧作为搜索区域不同，新的方法从中间帧引入动态更新的模板作为附加输入，以提供额外的时序信息。</p>
+<p>实现与前面一样，直接将三个输入拼接起来即可。</p>
+<h3 id="head-1">Head</h3>
+<p>目标跟踪时当目标被遮挡或丢失时不应更新动态模板。为简化问题，文章认为只要搜索区域包含目标就可以更新动态模板。所以文章添加了一个简单的 Score Head，包含三层感知机和一个 sigmoid 激活函数，若当前状态得分高于阈值则更新动态模板。</p>
+<h3 id="train">Train</h3>
+<p>在这里引入分类任务，但将定位和分类分开进行。将训练划分为两个阶段，第一阶段训练除了 Score Head 以外的部分，在保证搜索区域包含目标对象的前提下学习定位。在二阶段仅训练 Score Head，使用交叉熵作为 Loss。</p>
+<p>初始时动态模板为第一帧的模板。当上一次更新距当前帧至少 $T_u$ 帧且 Score Head 给出的分数大于给定阈值，则更新动态模板为当前帧的模板。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2023-08-04 20:49:05">更新于 2023-08-04&nbsp;</span>
+        <span title="更新于 2023-08-10 16:04:06">更新于 2023-08-10&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/crossmodel/" data-title="《Cross-Modal Object Tracking ...》 论文阅读笔记" data-hashtags="CV,论文,笔记"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/crossmodel/" data-hashtag="CV"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/crossmodel/" data-title="《Cross-Modal Object Tracking ...》 论文阅读笔记" data-image="/002.jpg"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/stark/" data-title="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记" data-hashtags="CV,论文,笔记"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/stark/" data-hashtag="CV"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/stark/" data-title="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记" data-image="/003.png"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>
@@ -219,8 +255,7 @@
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/vul1/" class="post-nav-item" rel="prev" title="漏洞分析：缓冲区溢出"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>漏洞分析：缓冲区溢出</a>
-      <a href="/posts/stark/" class="post-nav-item" rel="next" title="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记">《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/posts/crossmodel/" class="post-nav-item" rel="prev" title="《Cross-Modal Object Tracking ...》 论文阅读笔记"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>《Cross-Modal Object Tracking ...》 论文阅读笔记</a></div>
 </div>
 <div id="comments"><div id="giscus">
           <script
