@@ -3,27 +3,15 @@
     <title>xfarawayx&#39;s Blog</title>
     <link>http://example.org/</link>
     <description>xfarawayx&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 10 Aug 2023 16:04:06 &#43;0800</lastBuildDate>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</lastBuildDate>
       <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
     <item>
-  <title>《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记</title>
-  <link>http://example.org/posts/stark/</link>
-  <pubDate>Thu, 10 Aug 2023 16:04:06 &#43;0800</pubDate>
-  <author>作者</author>
-  <guid>http://example.org/posts/stark/</guid>
-  <description><![CDATA[<div class="featured-image">
-        <img src="/003.png" referrerpolicy="no-referrer">
-      </div><p>CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记</p>]]></description>
-</item>
-<item>
   <title>《Cross-Modal Object Tracking ...》 论文阅读笔记</title>
   <link>http://example.org/posts/crossmodel/</link>
   <pubDate>Fri, 04 Aug 2023 20:49:05 &#43;0800</pubDate>
   <author>作者</author>
   <guid>http://example.org/posts/crossmodel/</guid>
-  <description><![CDATA[<div class="featured-image">
-        <img src="/002.jpg" referrerpolicy="no-referrer">
-      </div><p>CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记</p>]]></description>
+  <description><![CDATA[<p>CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记</p>]]></description>
 </item>
 <item>
   <title>漏洞分析：缓冲区溢出</title>
@@ -31,9 +19,7 @@
   <pubDate>Fri, 04 Aug 2023 14:24:08 &#43;0800</pubDate>
   <author>作者</author>
   <guid>http://example.org/posts/vul1/</guid>
-  <description><![CDATA[<div class="featured-image">
-        <img src="/001.jpg" referrerpolicy="no-referrer">
-      </div><p>本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。</p>]]></description>
+  <description><![CDATA[<p>本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -9,9 +9,7 @@
   <pubDate>Fri, 04 Aug 2023 14:24:08 &#43;0800</pubDate>
   <author>作者</author>
   <guid>http://example.org/posts/vul1/</guid>
-  <description><![CDATA[<div class="featured-image">
-        <img src="/001.jpg" referrerpolicy="no-referrer">
-      </div><p>本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。</p>]]></description>
+  <description><![CDATA[<p>本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。</p>]]></description>
 </item>
 </channel>
 </rss>

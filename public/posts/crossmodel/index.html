@@ -10,7 +10,7 @@
 <meta name="description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记" /><meta name="keywords" content='CV, 论文, 笔记' /><meta itemprop="name" content="《Cross-Modal Object Tracking ...》 论文阅读笔记">
 <meta itemprop="description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记"><meta itemprop="datePublished" content="2023-08-04T20:49:05+08:00" />
 <meta itemprop="dateModified" content="2023-08-04T20:49:05+08:00" />
-<meta itemprop="wordCount" content="681">
+<meta itemprop="wordCount" content="402">
 <meta itemprop="keywords" content="CV,论文,笔记," /><meta property="og:title" content="《Cross-Modal Object Tracking ...》 论文阅读笔记" />
 <meta property="og:description" content="CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记" />
 <meta property="og:type" content="article" />
@@ -23,7 +23,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/crossmodel/" /><link rel="prev" href="http://example.org/posts/vul1/" /><link rel="next" href="http://example.org/posts/stark/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://example.org/posts/crossmodel/" /><link rel="prev" href="http://example.org/posts/vul1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
@@ -32,7 +32,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/example.org\/posts\/crossmodel\/"
-    },"genre": "posts","keywords": "CV, 论文, 笔记","wordcount":  681 ,
+    },"genre": "posts","keywords": "CV, 论文, 笔记","wordcount":  402 ,
     "url": "http:\/\/example.org\/posts\/crossmodel\/","datePublished": "2023-08-04T20:49:05+08:00","dateModified": "2023-08-04T20:49:05+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -64,18 +64,7 @@
                 href="/tags/"
                 
                 
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
-            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
-            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
-              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
-            </a>
-            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
-              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
-            </a>
-            <span class="search-button search-loading" id="search-loading-desktop">
-              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-            </span>
-          </li><li class="menu-item theme-switch" title="切换主题">
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="切换主题">
           <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
         </li></ul>
     </nav>
@@ -90,23 +79,7 @@
       </div>
     </div>
     <nav>
-      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
-            <div class="search mobile" id="search-mobile">
-              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
-              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
-                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
-              </a>
-              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
-                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
-              </a>
-              <span class="search-button search-loading" id="search-loading-mobile">
-                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
-              </span>
-            </div>
-            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
-              取消
-            </a>
-          </li><li
+      <ul class="menu" id="menu-mobile"><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -132,12 +105,7 @@
       </ul>
     </nav>
   </div>
-</header><div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-  </div>
-  <div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+</header><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
       <div class="toc-content" id="toc-content-auto"></div></aside>
 
   <aside class="aside-custom">
@@ -149,8 +117,8 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://xfarawayx.github.io" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d=" srcset="https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x, https://www.gravatar.com/avatar/304ac3a0123f0360be6efe5e2feaf4d7?s=32&amp;d= 1.5x" sizes="auto" data-title="xfarawayx" data-alt="xfarawayx" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/>&nbsp;xfarawayx</a></span>
           <span class="post-category">收录于 <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 科研学习</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-08-04 20:49:05"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span title="更新于 2023-08-04 20:49:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 681 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
-    </div><div class="featured-image"><img loading="lazy" src="/002.jpg" srcset="/002.jpg 1x, /002.jpg 1.5x, /002.jpg 1.5x" sizes="auto" data-title="/002.jpg" data-alt="/002.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></div><div class="details toc" id="toc-static" data-kept="false">
+      <div class="post-meta-line"><span title="发布于 2023-08-04 20:49:05"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span title="更新于 2023-08-04 20:49:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-08-04">2023-08-04</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 402 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
           <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
@@ -159,17 +127,13 @@
   <ul>
     <li><a href="#背景">背景</a></li>
     <li><a href="#贡献点">贡献点</a></li>
-    <li><a href="#marmot-模型">MArMOT 模型</a></li>
-    <li><a href="#三步训练法">“三步训练法”</a></li>
-    <li><a href="#cmotb-benchmark">CMOTB Benchmark</a></li>
-    <li><a href="#实验">实验</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><p>CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记</p>
 <h2 id="背景">背景</h2>
 <ul>
 <li>现有的目标跟踪方法大多基于 RGB 图像序列，然而这些方法在低光环境下存在局限性。现有的引入深度（RGB-D）或热成像（RGB-T）的方法由于需要对平台设计要求高，无法得到广泛应用。</li>
-<li>许多监控摄像机包含近红外成像（NIR），在高光和低光环境下会分别切换为 RGB 成像和 NIR 成像（如题图）。两个模态特征差异大，为跟踪任务带来巨大挑战。本文主要尝试设计可嵌入式的网络解决减小两个模态数据的差异，并构建该类跨模态目标跟踪问题的 benchmark。</li>
+<li>许多监控摄像机包含近红外成像（NIR），在高光和低光环境下会分别切换为 RGB 成像和 NIR 成像。两个模态特征差异大，为跟踪任务带来巨大挑战。本文主要尝试设计可嵌入式的网络解决减小两个模态数据的差异，并构建该类跨模态目标跟踪问题的 benchmark。</li>
 </ul>
 <h2 id="贡献点">贡献点</h2>
 <ol>
@@ -177,25 +141,7 @@
 <li>提出一个算法 MArMOT(Modality-Aware cross-Modal Object Tracking algorithm)，用于减小两个模态图像之间的特征差异。该算法即插即用，可以方便嵌入各种主流跟踪算法框架。</li>
 <li>提出了一个“三步训练法”有效训练跨模态的目标跟踪网络。</li>
 <li>创建了一个跨模态目标跟踪问题的 benchmark 和对应的数据集，并通过实验证明上述方法有效。</li>
-</ol>
-<h2 id="marmot-模型">MArMOT 模型</h2>
-<p>该模型结构如下：</p>
-<p><img loading="lazy" src="/002/02.jpg" srcset="/002/02.jpg 1x, /002/02.jpg 1.5x, /002/02.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
-<p>模型经过 backbone 后首先通过两个并行的分支，用于学习目标在不同模态下的模态独立特征（modality-specific representation）。每个分支采用类似 Inception Net 的结构。具体原理待学习。</p>
-<p>之后使用 <a href="https://zhuanlan.zhihu.com/p/589953099"target="_blank" rel="external nofollow noopener noreferrer">SKNet</a> 融合两个特征。这里只用到 SKNet 后面的 Fuse 和 Select。</p>
-<p>将该网络插入各主流目标检测框架后实验验证得到两个模态的特征差异确实减小。</p>
-<p><img loading="lazy" src="/002/03.jpg" srcset="/002/03.jpg 1x, /002/03.jpg 1.5x, /002/03.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
-<h2 id="三步训练法">“三步训练法”</h2>
-<p><img loading="lazy" src="/002/04.jpg" srcset="/002/04.jpg 1x, /002/04.jpg 1.5x, /002/04.jpg 1.5x" sizes="auto" data-title="image" data-alt="image" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const a of ['style','data-title','data-alt','onerror','onload']){this.removeAttribute(a);}"/></p>
-<ol>
-<li>直接将 baseline 在数据集上微调。（此前 baseline 要在其他数据集上训练好）</li>
-<li>分别将对应模态的图像送往对应的分支进行训练。</li>
-<li>训练 SKNet 层并再次微调 baseline 模型。</li>
-</ol>
-<h2 id="cmotb-benchmark">CMOTB Benchmark</h2>
-<p>提供了一个名为 CMOTB 的跨模态目标识别数据集。此部分暂略。</p>
-<h2 id="实验">实验</h2>
-<p>待填坑 QwQ</p></div><div class="post-footer" id="post-footer">
+</ol></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -206,7 +152,7 @@
       <div class="post-info-share">
         <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="http://example.org/posts/crossmodel/" data-title="《Cross-Modal Object Tracking ...》 论文阅读笔记" data-hashtags="CV,论文,笔记"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="http://example.org/posts/crossmodel/" data-hashtag="CV"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/crossmodel/" data-title="《Cross-Modal Object Tracking ...》 论文阅读笔记" data-image="/002.jpg"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://example.org/posts/crossmodel/" data-title="《Cross-Modal Object Tracking ...》 论文阅读笔记"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>
@@ -219,40 +165,16 @@
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/vul1/" class="post-nav-item" rel="prev" title="漏洞分析：缓冲区溢出"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>漏洞分析：缓冲区溢出</a>
-      <a href="/posts/stark/" class="post-nav-item" rel="next" title="《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记">《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/posts/vul1/" class="post-nav-item" rel="prev" title="漏洞分析：缓冲区溢出"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>漏洞分析：缓冲区溢出</a></div>
 </div>
-<div id="comments"><div id="giscus">
-          <script
-            src="https://giscus.app/client.js"
-            data-repo="xfarawayx/xfarawayx.github.io"
-            data-repo-id="R_kgDOKDOmkA"
-            data-category="General"
-            data-category-id="DIC_kwDOKDOmkM4CYgzO"
-            data-mapping="pathname"
-            data-strict="0"
-            
-            data-theme="preferred_color_scheme"
-            data-reactions-enabled="1"
-            data-emit-metadata="0"
-            data-input-position="bottom"
-            data-lang="zh-CN"
-            data-loading="lazy"
-            crossorigin="anonymous"
-            async
-            defer
-          ></script>
-        </div>
-        <noscript>
-          Please enable JavaScript to view the comments powered by <a href="https://giscus.app/" rel="external nofollow noopener noreferrer">giscus</a>.
-        </noscript></div></article></main><footer class="footer">
+</article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.116.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">
               <a href="/"></a></span></div><div class="footer-line statistics"></div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
-        </div><div class="fixed-button view-comments d-none" role="button" aria-label="查看评论"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+        </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":true,"expired":false,"giscus":{"darkTheme":"dark","lightTheme":"light"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"useExtendedSearch":false}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

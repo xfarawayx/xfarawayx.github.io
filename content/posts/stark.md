@@ -11,7 +11,7 @@ author:
 description:
 keywords:
 license:
-comment: true
+comment: false
 weight: 0
 tags:
   - CV
