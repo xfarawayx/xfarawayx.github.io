@@ -1,38 +1,5 @@
----
-title: 漏洞分析：缓冲区溢出
-subtitle:
-date: 2023-08-04T14:30:00+08:00
-draft: false
-author:
-  name: xfarawayx
-  link: https://xfarawayx.github.io
-  email: farawaylc@qq.com
-  avatar: /qq-image.svg
-description:
-keywords:
-license:
-comment: true
-weight: 0
-tags:
-  - 信息安全
-  - 笔记
-categories:
-  - 专业课
-hiddenFromHomePage: false
-hiddenFromSearch: false
-summary:
-featuredImage: "/001.jpg"
-toc: true
-math: true
-lightgallery: false
-password:
-message:
-repost:
-  enable: false
-  url:
+# 漏洞分析：缓冲区溢出
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 本文浅谈《漏洞分析》课程中几个常见的栈溢出相关的题型。
 
@@ -444,3 +411,10 @@ int main(int argc, char **argv)
 如果开启了随机化，我们可以通过将返回地址覆写为 jmp esp，这样程序仍会停留在原先 esp 的位置上。我们紧随其后写入提权 shellcode 即可使实现攻击。
 
 详细原理和例题先咕着 QwQ。
+
+
+---
+
+> 作者: [xfarawayx](https://xfarawayx.github.io)  
+> URL: http://example.org/posts/vul1/  
+

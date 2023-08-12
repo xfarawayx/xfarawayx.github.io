@@ -1,39 +1,5 @@
----
-title: 《Cross-Modal Object Tracking ...》 论文阅读笔记
-subtitle:
-date: 2023-08-04T21:00:00+08:00
-draft: false
-author:
-  name: xfarawayx
-  link: https://xfarawayx.github.io
-  email: farawaylc@qq.com
-  avatar: /qq-image.svg
-description:
-keywords:
-license:
-comment: true
-weight: 0
-tags:
-  - CV
-  - 论文
-  - 笔记
-categories:
-  - 科研学习
-hiddenFromHomePage: false
-hiddenFromSearch: false
-summary:
-featuredImage: "/002.jpg"
-toc: true
-math: true
-lightgallery: false
-password:
-message:
-repost:
-  enable: false
-  url:
+# 《Cross-Modal Object Tracking ...》 论文阅读笔记
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Unified Benchmark》笔记
 
@@ -80,3 +46,9 @@ CV 论文《Cross-Modal Object Tracking: Modality-Aware Representations and A Un
 ## 实验
 
 待填坑 QwQ
+
+---
+
+> 作者: [xfarawayx](https://xfarawayx.github.io)  
+> URL: http://example.org/posts/crossmodel/  
+

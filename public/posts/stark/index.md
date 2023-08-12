@@ -1,40 +1,5 @@
----
-title: 《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记
-subtitle:
-date: 2023-08-10T17:00:00+08:00
-lastmod: 2023-08-12T16:00:00+08:00
-draft: false
-author:
-  name: xfarawayx
-  link: https://xfarawayx.github.io
-  email: farawaylc@qq.com
-  avatar: /qq-image.svg
-description:
-keywords:
-license:
-comment: true
-weight: 0
-tags:
-  - CV
-  - 论文
-  - 笔记
-categories:
-  - 科研学习
-hiddenFromHomePage: false
-hiddenFromSearch: false
-summary:
-featuredImage: "/003.png"
-toc: true
-math: true
-lightgallery: false
-password:
-message:
-repost:
-  enable: false
-  url:
+# 《Learning Spatio-Temporal Transformer for Visual Tracking》论文阅读笔记
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 CV 论文《Learning Spatio-Temporal Transformer for Visual Tracking》笔记
 
@@ -143,3 +108,9 @@ $$
 其中 $y_i$ 是 groundtruth 标注，$P_i$ 是预测的置信度。在训练 Score Head 时冻结其余参数，防止影响定位部分。
 
 初始时动态模板为第一帧的模板。当上一次更新距当前帧至少 $T_u$ 帧且 Score Head 给出的分数大于给定阈值，则从当前帧裁剪出新的动态模板作为输入。
+
+---
+
+> 作者: [xfarawayx](https://xfarawayx.github.io)  
+> URL: http://example.org/posts/stark/  
+
